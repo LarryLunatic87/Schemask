@@ -1,0 +1,322 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Root Design Tokens ─────────────────────────────────────── */
+:root {
+  --bg-0: #08090e;
+  --bg-1: #0d0f18;
+  --bg-2: #141620;
+  --bg-3: #1b1e2c;
+  --border-subtle: #1a1d2e;
+  --border-default: #232740;
+  --border-strong: #2e3352;
+  --text-primary: #dde0ed;
+  --text-secondary: #6e7494;
+  --text-muted: #3d4060;
+  --accent: #22c55e;
+  --accent-dim: rgba(34, 197, 94, 0.1);
+  --accent-glow: rgba(34, 197, 94, 0.22);
+}
+
+/* ─── Base ───────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-0);
+  color: var(--text-primary);
+  font-family: 'Outfit', system-ui, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-1);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3d4470;
+}
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: rgba(34, 197, 94, 0.2);
+  color: var(--text-primary);
+}
+
+/* ─── Utility classes ────────────────────────────────────────── */
+.font-mono {
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+}
+
+/* Grid background texture on the main area */
+.grid-texture {
+  background-image:
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+}
+
+/* ─── Drop zone states ───────────────────────────────────────── */
+.dropzone-idle {
+  border: 1.5px dashed var(--border-default);
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dropzone-idle:hover {
+  border-color: var(--border-strong);
+  background-color: var(--bg-2);
+}
+
+.dropzone-active {
+  border: 1.5px dashed var(--accent);
+  background-color: var(--accent-dim);
+  box-shadow: 0 0 0 4px var(--accent-glow), inset 0 0 40px rgba(34, 197, 94, 0.04);
+}
+
+/* ─── Type badges ────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* ─── Phase 2: Type badges by class ─────────────────────────── */
+
+.badge-type-a {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  font-weight: 600;
+}
+.badge-type-b {
+  background: rgba(251, 146, 60, 0.1);
+  color: #fb923c;
+  border: 1px solid rgba(251, 146, 60, 0.22);
+}
+.badge-type-b.badge-date {
+  background: rgba(167, 139, 250, 0.1);
+  color: #a78bfa;
+  border: 1px solid rgba(167, 139, 250, 0.22);
+}
+.badge-type-c {
+  background: rgba(107, 114, 128, 0.12);
+  color: #9ca3af;
+  border: 1px solid rgba(107, 114, 128, 0.2);
+}
+.badge-type-x {
+  background: rgba(75, 85, 99, 0.08);
+  color: #4b5563;
+  border: 1px solid rgba(75, 85, 99, 0.15);
+}
+
+/* ─── Class pill badges (A / B / C) ─────────────────────────── */
+.badge-class-a, .badge-class-b, .badge-class-c, .badge-class-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Fira Code', monospace;
+  flex-shrink: 0;
+}
+.badge-class-a {
+  background: rgba(239,68,68,0.15); color:#f87171;
+  border: 1px solid rgba(239,68,68,0.3);
+}
+.badge-class-b {
+  background: rgba(251,146,60,0.12); color:#fb923c;
+  border: 1px solid rgba(251,146,60,0.25);
+}
+.badge-class-c {
+  background: rgba(107,114,128,0.1); color:#6b7280;
+  border: 1px solid rgba(107,114,128,0.2);
+}
+.badge-class-x {
+  background: rgba(75,85,99,0.08); color:#374151;
+  border: 1px solid rgba(75,85,99,0.12);
+}
+
+/* ─── Toggle ─────────────────────────────────────────────────── */
+.toggle-track {
+  position: relative;
+  display: inline-block;
+  width: 32px; height: 18px;
+  border-radius: 9px;
+  border: 1px solid var(--border-default);
+  background: var(--bg-3);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+.toggle-track.is-on   { background: rgba(34,197,94,0.2); border-color: rgba(34,197,94,0.5); }
+.toggle-track.is-off  { background: var(--bg-3); border-color: var(--border-default); }
+.toggle-track.is-disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+.toggle-thumb {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.toggle-track.is-on .toggle-thumb { transform: translateX(14px); background: var(--accent); }
+
+/* Legacy badges kept for transition */
+.badge-vat {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  font-weight: 600;
+}
+
+.badge-number {
+  background: rgba(91, 156, 246, 0.12);
+  color: #5b9cf6;
+  border: 1px solid rgba(91, 156, 246, 0.2);
+}
+
+.badge-date {
+  background: rgba(167, 139, 250, 0.12);
+  color: #a78bfa;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+.badge-email {
+  background: rgba(251, 146, 60, 0.12);
+  color: #fb923c;
+  border: 1px solid rgba(251, 146, 60, 0.2);
+}
+
+.badge-percent {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.badge-text {
+  background: rgba(75, 85, 99, 0.2);
+  color: #6b7280;
+  border: 1px solid rgba(75, 85, 99, 0.25);
+}
+
+/* ─── Sheet tabs ─────────────────────────────────────────────── */
+.sheet-tab {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.sheet-tab:hover {
+  background-color: var(--bg-3);
+  color: var(--text-primary);
+}
+
+.sheet-tab-active {
+  background-color: var(--bg-3);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+
+/* ─── Table ──────────────────────────────────────────────────── */
+.schema-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schema-table th {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 10px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.schema-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: top;
+}
+
+.schema-table tr:last-child td {
+  border-bottom: none;
+}
+
+.schema-table tbody tr:hover td {
+  background-color: rgba(255, 255, 255, 0.015);
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.35s ease forwards;
+}
+
+.animate-slide-up-delay {
+  opacity: 0;
+  animation: slideUp 0.4s ease 0.1s forwards;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
